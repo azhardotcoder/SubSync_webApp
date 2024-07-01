@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subscription</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/whatsapp.js"></script>
+    <script src="js/add.js"></script>
+    <script>
+        window.onload = function() {
+            firebase.auth().onAuthStateChanged(user => {
+                if (!user) {
+                    window.location.href = "login.html";
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Add Subscription</h1>
+        <button class="logout" onclick="logout()">Logout</button>
+        <button class="nav" onclick="window.location.href='list.html'">View Subscriptions</button>
+        <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
+    </header>
+    <div class="container">
+        <form id="subscription-form">
+            <label for="subscription">Subscription:</label>
+            <input type="text" id="subscription" required>
+
+            <label for="uid">UID:</label>
+            <input type="text" id="uid" readonly disabled>
+
+            <label for="pod">POD:</label>
+            <input type="date" id="pod" required>
+
+            <label for="duration">Duration:</label>
+            <select id="duration" required>
+                <option value="1">1 Month</option>
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+            </select>
+
+            <label for="eod">EOD:</label>
+            <input type="date" id="eod" required>
+
+            <label for="ar">Amount Received:</label>
+            <input type="number" id="ar" required>
+
+            <label for="pd">Plan Details:</label>
+            <input type="text" id="pd" required>
+
+            <label for="customer-number">Customer Number:</label>
+            <input type="tel" id="customer-number" required>
+
+            <button type="submit">Add Subscription</button>
+        </form>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notifications-modal">
+        <div class="modal-content">
+            <h2>All Notifications</h2>
+            <ul id="all-notifications-list"></ul>
+            <button class="close-button" onclick="closeNotificationsModal()">Close</button>
+        </div>
+    </div>
+
+    <div id="notifications"></div>
+</body>
+</html>
