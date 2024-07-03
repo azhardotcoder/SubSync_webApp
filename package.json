@@ -2,18 +2,25 @@
     "name": "whatsapp-notification",
     "version": "1.0.0",
     "description": "A simple app to send WhatsApp notifications using Twilio",
-    "main": "server.js",
+    "main": "index.js",
+
     "scripts": {
-        "start": "node server.js",
-        "dev": "nodemon server.js"
+        "start": "node --env-file=.env index.js",
+        "dev": "nodemon --env-file=.env index.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "axios": "^1.7.2",
         "body-parser": "^1.20.2",
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
+        "firebase": "^8.6.8",
+        "nodemailer": "^6.9.14",
         "twilio": "^5.2.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.4"
     }
 }

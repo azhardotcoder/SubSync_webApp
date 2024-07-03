@@ -125,3 +125,5 @@ function closeNotificationsModal() {
     const modal = document.getElementById('notifications-modal');
     modal.style.display = 'none';
 }
+
+

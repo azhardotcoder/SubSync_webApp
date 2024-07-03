@@ -1,0 +1,192 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #3498db;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-buttons {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons button {
+    margin-left: 10px;
+}
+
+/* Container Styles */
+.container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Button Styles */
+button {
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Logout Button */
+button.logout {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.logout:hover {
+    background-color: #c0392b;
+}
+
+/* Navigation Buttons */
+button.nav {
+    color: rgb(0, 0, 0);
+}
+
+button.nav.add {
+    background-color: #2ecc71;
+}
+
+button.nav.add:hover {
+    background-color: #27ae60;
+}
+
+button.nav.view {
+    background-color: #3498db;
+}
+
+button.nav.view:hover {
+    background-color: #2980b9;
+}
+
+/* Close Button */
+button.close-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.close-button:hover {
+    background-color: #c0392b;
+}
+
+/* Notification Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-content ul li {
+    background-color: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Notification Styles */
+.notification {
+    background-color: #444;
+    color: #fff;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    bottom: 30px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    header {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .header-buttons {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    button {
+        padding: 15px;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}

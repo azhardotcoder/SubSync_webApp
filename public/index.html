@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscription Manager</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/whatsapp.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="./js/firebase-config.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/whatsapp.js"></script>
+    <script src="./js/add.js"></script>
 </head>
 <body>
     <header>
         <h1>Subscription Manager</h1>
-        <button class="logout" onclick="logout()">Logout</button>
-        <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
+        <div class="header-buttons">
+            <button class="logout" onclick="logout()">Logout</button>
+            <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
+        </div>
     </header>
     <div class="container">
         <div class="buttons">
-            <button class="nav" onclick="window.location.href='add.html'">Add Subscription</button>
-            <button class="nav" onclick="window.location.href='list.html'">View Subscriptions</button>
+            <button class="nav add" onclick="window.location.href='/add'">Add Subscription</button>
+            <button class="nav view" onclick="window.location.href='/list'">View Subscriptions</button>
         </div>
     </div>
 
     <!-- Notification Modal -->
-    <div id="notifications-modal">
+    <div id="notifications-modal" class="modal">
         <div class="modal-content">
             <h2>All Notifications</h2>
             <ul id="all-notifications-list"></ul>

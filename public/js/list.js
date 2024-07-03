@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const database = firebase.database();
+    let allNotifications = [];
 
     function loadSubscriptionData() {
         database.ref('subscriptions').on('value', function (snapshot) {
@@ -23,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const table = document.getElementById('subscription-table').getElementsByTagName('tbody')[0];
         const newRow = table.insertRow();
         newRow.dataset.key = key;
+
+        const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+        const isExpired = subscription.eod < today;
+        newRow.className = isExpired ? 'expired' : 'active';
 
         newRow.innerHTML = `
             <td>${subscription.subscription}</td>
@@ -102,7 +107,14 @@ document.addEventListener('DOMContentLoaded', function () {
             button.previousElementSibling.style.display = 'inline';
             button.nextElementSibling.style.display = 'none';
             showNotification("Subscription updated successfully!");
-            sendWhatsAppNotification("Subscription updated successfully!", updatedSubscription.customerNumber);
+            sendWhatsAppNotification("Subscription updated successfully!", "+918800808452");
+
+            // Update row color based on new EOD
+            const isExpired = updatedSubscription.eod < new Date().toISOString().split('T')[0];
+            row.className = isExpired ? 'expired' : 'active';
+            console.log('Updated subscription', updatedSubscription.subscription, 'is', isExpired ? 'expired' : 'active');
+        }).catch(error => {
+            showNotification('Failed to update subscription: ' + error.message);
         });
     }
 
@@ -187,8 +199,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to check expired subscriptions
     function formatWhatsAppMessage(subscription) {
-        return `Subscription :- ${subscription.subscription}\n\nUID :- ${subscription.uid}\nPOD :- ${formatDate(subscription.pod)}\nEOD :- ${formatDate(subscription.eod)}\nAR :- ${subscription.ar}₹\nPD :- ${subscription.pd}\n\nNumber :- ${subscription.customerNumber}`;
+        return `
+            <div>
+                <p><strong>Subscription:</strong> ${subscription.subscription}</p>
+                <p><strong>UID:</strong> ${subscription.uid}</p>
+                <p><strong>POD:</strong> ${formatDate(subscription.pod)}</p>
+                <p><strong>EOD:</strong> ${formatDate(subscription.eod)}</p>
+                <p><strong>AR:</strong> ${subscription.ar}₹</p>
+                <p><strong>PD:</strong> ${subscription.pd}</p>
+                <p><strong>Number:</strong><a href="wa.me/${subscription.customerNumber}"> ${subscription.customerNumber}</a></p>
+
+                <a href="https://www.azhardev.me/">@ Azhar</a>
+            </div>
+        `;
     }
+
+    
 
     function getCurrentDate() {
         const today = new Date();
@@ -198,11 +224,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return `${year}-${month}-${day}`;
     }
+
     function checkExpiredSubscriptions() {
-
         const today = getCurrentDate();
-
-
 
         firebase.database().ref('subscriptions').once('value', function (snapshot) {
             const subscriptions = snapshot.val();
@@ -211,21 +235,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 const subscription = subscriptions[key];
                 if (today == subscriptions[key].eod) {
                     showNotification(`Subscription for ${subscription.subscription} (UID: ${subscription.uid}) has expired!`);
-                    if (!subscription.notificationSent == true) {
-                       
+                    if (!subscription.notificationSent) {
                         const message = formatWhatsAppMessage(subscription);
-                        sendWhatsAppNotification(message);
+                        sendWhatsAppNotification(message, "+918800808452");
 
+                        firebase.database().ref('subscriptions/' + key).update({
+                            notificationSent: true
+                        }).then(() => {
+                            console.log(`web notify`);
+                        }).catch(error => {
+                            console.error(`Failed`, error); // Debug log
+                        });
                     }
-                    firebase.database().ref('subscriptions/' + key).update({
-                        notificationSent: true
-                    }).then(() => {
-                        console.log(`web notify`);
-                    }).catch(error => {
-                        console.error(`Failed`, error); // Debug log
-                    });
                 }
             }
+        });
+    }
+
+    function sendWhatsAppNotification(message, phoneNumber) {
+        fetch('/send-whatsapp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                to: phoneNumber,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('notification sent successfully.');
+            } else {
+                console.error('Failed to send WhatsApp notification:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error sending WhatsApp notification:', error);
         });
     }
 
@@ -238,4 +285,9 @@ document.addEventListener('DOMContentLoaded', function () {
     window.showAllNotifications = showAllNotifications;
     window.closeNotificationsModal = closeNotificationsModal;
     window.checkExpiredSubscriptions = checkExpiredSubscriptions;
+
+    // Load subscription data on initial load
+    loadSubscriptionData();
 });
+
+

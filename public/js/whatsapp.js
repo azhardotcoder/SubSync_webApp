@@ -1,8 +1,5 @@
-
-
 function sendWhatsAppNotification(message) {
-  
-   
+
     fetch('/send-whatsapp', {
         method: 'POST',
         headers: {
@@ -10,7 +7,7 @@ function sendWhatsAppNotification(message) {
         },
         body: JSON.stringify({
             message: message,
-            to: "+918800808452",
+            to: "+917897894523",
         }),
     })
     .then(response => response.json())
@@ -18,13 +15,14 @@ function sendWhatsAppNotification(message) {
    
         if (data.success) {
             
-            console.log('WhatsApp notification sent successfully.');
+            console.log('Message sent successfully.');
         } else {
-            console.error('Failed to send WhatsApp notification:', data.error);
+            console.error('Failed to send notification:', data.error);
         }
     })
     .catch(error => {
-        console.error('Error sending WhatsApp notification:', error);
+        console.error('Error sending notification:', error);
     });
 }
+
 

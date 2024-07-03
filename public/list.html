@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscription List</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/list.css">
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
-    <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/list.js"></script>
-    <script src="js/whatsapp.js"></script>
+    <script src="./js/firebase-config.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/list.js"></script>
+    <script src="./js/whatsapp.js"></script>
+    <script src="./js/add.js"></script>
     <script>
         window.onload = function() {
             firebase.auth().onAuthStateChanged(user => {
                 if (!user) {
-                    window.location.href = "login.html";
+                    window.location.href = "login";
                 } else {
                     loadSubscriptionData();
                 }
@@ -28,8 +28,10 @@
 <body>
     <header>
         <h1>Subscription List</h1>
-        <button class="logout" onclick="logout()">Logout</button>
-        <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
+        <div class="header-buttons">
+            <button class="logout" onclick="logout()">Logout</button>
+            <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
+        </div>
     </header>
     <div class="container">
         <input type="text" id="search" placeholder="Search Subscriptions" onkeyup="searchSubscriptions()">
@@ -50,8 +52,8 @@
                 <!-- Subscription details will go here -->
             </tbody>
         </table>
-        <button class="nav" onclick="window.location.href='add.html'">Add Subscription</button>
-        <button class="nav" onclick="window.location.href='index.html'">Home</button>
+        <button class="nav" onclick="window.location.href='/add'">Add Subscription</button>
+        <button class="nav" onclick="window.location.href='/'">Home</button>
         <div id="notifications"></div>
     </div>
 

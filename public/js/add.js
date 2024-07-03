@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
@@ -33,7 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Automatically fill current date for POD and generate UID
     const podField = document.getElementById('pod');
-    podField.value = getCurrentDate();
+    if (podField) {
+        podField.value = getCurrentDate();
+    } else {
+        console.error('Element with ID "pod" not found.');
+    }
 
     // Function to get the next serial number from Firebase
     function getNextSerialNumber(year, month, callback) {
@@ -52,7 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         getNextSerialNumber(currentYear, currentMonth, serialNumber => {
             const uid = generateUID(currentYear, getMonthAbbreviation(currentMonth), serialNumber);
-            document.getElementById('uid').value = uid;
+            const uidField = document.getElementById('uid');
+            if (uidField) {
+                uidField.value = uid;
+            } else {
+                console.error('Element with ID "uid" not found.');
+            }
 
             // Store the updated serial number back to Firebase
             const uidPrefix = currentYear.toString().slice(-2) + getMonthAbbreviation(currentMonth);
@@ -60,7 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    podField.addEventListener('change', updateUID);
+    if (podField) {
+        podField.addEventListener('change', updateUID);
+    }
 
     // Initially generate the UID
     updateUID();
@@ -86,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const ar = document.getElementById('ar').value;
         const pd = document.getElementById('pd').value;
         const customerNumber = document.getElementById('customer-number').value;
-
+      
         const newSubscriptionRef = database.ref('subscriptions').push();
         newSubscriptionRef.set({
             subscription: subscription,
@@ -100,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).then(() => {
             showNotification('Subscription added successfully!');
             // Send WhatsApp notification
-            sendWhatsAppNotification('Subscription added successfully!', customerNumber);
+            // sendWhatsAppNotification('Subscription added successfully!', customerNumber);
 
             document.getElementById('subscription-form').reset();
             // Reset the POD field to the current date and generate a new UID
@@ -111,3 +124,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+

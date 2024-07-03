@@ -1,86 +1,83 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    color: #333;
 }
 
+/* Header Styles */
 header {
-    background-color: #333;
+    background-color: #3498db;
     color: white;
-    padding: 10px 0;
+    padding: 15px;
     text-align: center;
     position: relative;
 }
 
 header h1 {
     margin: 0;
+    font-size: 24px;
 }
 
-.container {
-    margin: 20px;
-}
-
-.buttons {
+.header-buttons {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    gap: 10px;
 }
 
-form {
-    background-color: white;
+.header-buttons button {
+    margin-left: 10px;
+}
+
+/* Container Styles */
+.container {
+    margin: 20px auto;
+    max-width: 600px;
     padding: 20px;
-    border-radius: 5px;
+    background-color: white;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
 form label {
-    display: block;
-    margin: 10px 0 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 form input, form select, form button {
-    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%;
 }
 
 form button {
-    background-color: #333;
+    background-color: #3498db;
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 form button:hover {
-    background-color: #555;
+    background-color: #2980b9;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-.highlight {
-    background-color: yellow;
-}
-
+/* Notification Styles */
 .notification {
     background-color: #444;
     color: #fff;
@@ -100,11 +97,12 @@ th {
 
 .notification.show {
     opacity: 1;
-    bottom: 30px; /* Slightly raise the position when showing */
+    bottom: 30px;
 }
 
+/* Modal Styles */
 #notifications-modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -156,6 +154,7 @@ th {
     background-color: #c0392b;
 }
 
+/* Button Styles */
 button.logout, button.nav {
     background-color: #e74c3c;
     color: white;
@@ -178,46 +177,29 @@ button.nav:hover {
     background-color: #2980b9;
 }
 
-/* Login page styles */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+/* Responsive Styles */
+@media (max-width: 600px) {
+    header {
+        padding: 10px;
+    }
 
-.login-form {
-    background-color: white;
-    padding: 40px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+    header h1 {
+        font-size: 20px;
+    }
 
-.login-form h2 {
-    margin-bottom: 20px;
-}
+    .header-buttons {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.login-form input, .login-form button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
 
-.login-form button {
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.login-form button:hover {
-    background-color: #555;
-}
-
-#recaptcha-container {
-    margin-bottom: 10px;
+    form button {
+        padding: 15px;
+    }
 }
