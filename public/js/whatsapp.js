@@ -7,7 +7,7 @@ function sendWhatsAppNotification(message) {
         },
         body: JSON.stringify({
             message: message,
-            to: "+917897894523",
+            to: "", // Add the recipient's phone number here
         }),
     })
     .then(response => response.json())
