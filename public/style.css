@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: black; /* Background color for all pages */
+    color: white; /* Text color for all pages */
 }
 
 header {
@@ -19,12 +20,6 @@ header h1 {
 
 .container {
     margin: 20px;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
 }
 
 form {
@@ -57,28 +52,13 @@ form button {
 form button:hover {
     background-color: #555;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-th, td {
+#search{
+    width: 90%;
     padding: 10px;
-    text-align: left;
-}
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 
-th {
-    background-color: #f4f4f4;
-}
-
-.highlight {
-    background-color: yellow;
 }
 
 .notification {
@@ -117,8 +97,9 @@ th {
 }
 
 #notifications-modal .modal-content {
-    background-color: #fff;
+    background-color: #5b5454cf;
     padding: 20px;
+    color: black;
     border-radius: 8px;
     width: 80%;
     max-width: 500px;
@@ -128,6 +109,7 @@ th {
 
 #notifications-modal .modal-content h2 {
     margin-top: 0;
+    color: white;
 }
 
 #notifications-modal .modal-content ul {
@@ -178,46 +160,66 @@ button.nav:hover {
     background-color: #2980b9;
 }
 
-/* Login page styles */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login-form {
-    background-color: white;
-    padding: 40px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.login-form h2 {
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-.login-form input, .login-form button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
+table, th, td {
     border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
-.login-form button {
+th, td {
+    padding: 10px;
+    text-align: left;
+    color: white; /* Text color for table content */
+}
+
+th {
     background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
 }
 
-.login-form button:hover {
-    background-color: #555;
-}
-
-#recaptcha-container {
-    margin-bottom: 10px;
+/* Responsive design */
+@media (max-width: 768px) {
+    table, th, td {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    th, td {
+        width: 280px;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    thead {
+        display: none;
+    }
+    
+    tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+    }
+    
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 10px;
+        position: relative;
+    }
+    
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #ccc; /* Color for data labels */
+    }
 }
