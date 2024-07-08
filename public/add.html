@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Subscription</title>
-    <link rel="stylesheet" href="/css/add.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    <script src="./js/firebase-config.js"></script>
-    <script src="./js/auth.js"></script>
-    <script src="./js/whatsapp.js"></script>
-    <script src="./js/add.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/whatsapp.js"></script>
+    <script src="js/add.js"></script>
     <script>
         window.onload = function() {
             firebase.auth().onAuthStateChanged(user => {
                 if (!user) {
-                    window.location.href = "login";
+                    window.location.href = "login.html";
                 }
             });
         };
@@ -25,61 +26,42 @@
 <body>
     <header>
         <h1>Add Subscription</h1>
-        <div class="header-buttons">
-            <button class="logout" onclick="logout()">Logout</button>
-            <button class="nav" onclick="window.location.href='/list'">View Subscriptions</button>
-            <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
-        </div>
+        <button class="logout" onclick="logout()">Logout</button>
+        <button class="nav" onclick="window.location.href='list.html'">View Subscriptions</button>
+        <button class="nav" onclick="showAllNotifications()">View All Notifications</button>
     </header>
     <div class="container">
         <form id="subscription-form">
-            <div class="form-group">
-                <label for="subscription">Subscription:</label>
-                <input type="text" id="subscription" required>
-            </div>
+            <label for="subscription">Subscription:</label>
+            <input type="text" id="subscription" required>
 
-            <div class="form-group">
-                <label for="uid">UID:</label>
-                <input type="text" id="uid" readonly disabled>
-            </div>
+            <label for="uid">UID:</label>
+            <input type="text" id="uid" readonly disabled>
 
-            <div class="form-group">
-                <label for="pod">POD:</label>
-                <input type="date" id="pod" required>
-            </div>
-            
+            <label for="pod">POD:</label>
+            <input type="date" id="pod" required>
 
-            <div class="form-group">
-                <label for="duration">Duration:</label>
-                <select id="duration" required>
-                    <option value="1">1 Month</option>
-                    <option value="3">3 Months</option>
-                    <option value="6">6 Months</option>
-                    <option value="12">12 Months</option>
-                </select>
-            </div>
+            <label for="duration">Duration:</label>
+            <select id="duration" required>
+                <option value="1">1 Month</option>
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+            </select>
 
-            <div class="form-group">
-                <label for="eod">EOD:</label>
-                <input type="date" id="eod" required>
-            </div>
+            <label for="eod">EOD:</label>
+            <input type="date" id="eod" required>
 
-            <div class="form-group">
-                <label for="ar">Amount Received:</label>
-                <input type="number" id="ar" required>
-            </div>
+            <label for="ar">Amount Received:</label>
+            <input type="number" id="ar" required>
 
-            <div class="form-group">
-                <label for="pd">Plan Details:</label>
-                <input type="text" id="pd" required>
-            </div>
+            <label for="pd">Plan Details:</label>
+            <input type="text" id="pd" required>
 
-            <div class="form-group">
-                <label for="customer-number">Customer Number:</label>
-                <input type="tel" id="customer-number" required>
-            </div>
+            <label for="customer-number">Customer Number:</label>
+            <input type="tel" id="customer-number" required>
 
-            <button type="submit" class="submit-button">Add Subscription</button>
+            <button type="submit">Add Subscription</button>
         </form>
     </div>
 
